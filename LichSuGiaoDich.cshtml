@@ -1,0 +1,44 @@
+﻿@model List<_2001230507_NhanTuManh_B5.Models.HoaDon>
+
+@{
+    ViewBag.Title = "Lịch sử giao dịch";
+}
+
+<h2>Lịch sử giao dịch</h2>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var hd in Model)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Hóa đơn #@hd.MaHoaDon</strong> - Ngày: @hd.NgayTao.ToString("dd/MM/yyyy")
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Hình</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                    @foreach (var ct in hd.ChiTietHoaDon)
+                    {
+                        <tr>
+                            <td><img src="@Url.Content("~/" + ct.SanPham.Hinh)" width="80" /></td>
+                            <td>@ct.SanPham.TenSP</td>
+                            <td>@ct.SanPham.Gia.ToString("N0") đ</td>
+                            <td>@ct.SoLuong</td>
+                            <td>@(ct.SoLuong * ct.SanPham.Gia).ToString("N0") đ</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>Không có hóa đơn nào.</p>
+}

@@ -1,0 +1,25 @@
+﻿@model List<_2001230507_NhanTuManh_B5.Models.SanPham>
+
+@{
+    ViewBag.Title = "Danh sách sản phẩm";
+}
+
+<h2>Danh sách sản phẩm</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Hình</th>
+        <th>Tên sản phẩm</th>
+        <th>Giá</th>
+        <th>Chi tiết</th>
+    </tr>
+    @foreach (var sp in Model)
+    {
+        <tr>
+            <td><img src="@Url.Content("~/" + sp.Hinh)" width="100" /></td>
+            <td>@sp.TenSP</td>
+            <td>@sp.Gia.ToString("N0") đ</td>
+            <td><a href="@Url.Action("Details", "SanPham", new { id = sp.MaSanPham })">Xem</a></td>
+        </tr>
+    }
+</table>

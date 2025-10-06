@@ -1,0 +1,49 @@
+﻿@model List<_2001230507_NhanTuManh_B5.Models.SanPham>
+@{
+    ViewBag.Title = "Tìm kiếm sản phẩm";
+}
+
+<h2>Tìm kiếm sản phẩm</h2>
+
+@using (Html.BeginForm("TimKiem", "SanPham", FormMethod.Get))
+{
+    <div class="form-group">
+        <label>Loại sản phẩm:</label>
+        @Html.DropDownList("maLoai", (SelectList)ViewBag.DanhSachLoai, "Tất cả", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Giá từ:</label>
+        <input type="number" name="giaTu" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Giá đến:</label>
+        <input type="number" name="giaDen" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Tìm</button>
+}
+
+@if (Model != null && Model.Any())
+{
+    <h3>Kết quả:</h3>
+    <table class="table table-bordered">
+        <tr>
+            <th>Hình</th>
+            <th>Tên sản phẩm</th>
+            <th>Giá</th>
+            <th>Ghi chú</th>
+        </tr>
+        @foreach (var sp in Model)
+        {
+            <tr>
+                <td><img src="@Url.Content("~/" + sp.Hinh)" width="100" /></td>
+                <td>@sp.TenSP</td>
+                <td>@sp.Gia.ToString("N0") đ</td>
+                <td>@sp.GhiChu</td>
+            </tr>
+        }
+    </table>
+}
+else if (Model != null)
+{
+    <p class="text-warning">Không có sản phẩm phù hợp.</p>
+}

@@ -1,0 +1,12 @@
+﻿@model  _2001230507_NhanTuManh_B5.Models.SanPham
+@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+}
+
+<h2>@Model.TenSP</h2>
+<img src="@Url.Content("~/" + Model.Hinh)" width="200" />
+
+<p><strong>Giá:</strong> @Model.Gia.ToString("N0") đ</p>
+<p><strong>Ghi chú:</strong> @Model.GhiChu</p>
+
+<a href="@Url.Action("Index", "SanPham")">Quay lại danh sách</a>
